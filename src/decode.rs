@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::Write;
 use std::str::FromStr;
 
-use crate::encode::{to_binary_string, to_pgn};
+use crate::utils::{to_binary_string, to_pgn};
 
 pub fn decode(pgns: &Vec<String>, output_file_path: &str) {
     let mut collected_bits = String::new();

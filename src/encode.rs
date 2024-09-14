@@ -1,10 +1,8 @@
-use chess::{Action, ChessMove, Game, GameResult, MoveGen, Piece};
+use chess::{Action, ChessMove, Game, GameResult, MoveGen};
 use std::str::FromStr;
 use std::{collections::HashMap, fs::File, io::Read, time::Instant};
 
-pub fn to_binary_string(value: usize, length: usize) -> String {
-    format!("{:0length$b}", value, length = length)
-}
+use crate::utils::{to_binary_string, to_pgn};
 
 pub fn encode(file_path: &str) -> Vec<String> {
     let start_time = Instant::now();
@@ -98,22 +96,6 @@ pub fn encode(file_path: &str) -> Vec<String> {
     output_pgns
 }
 
-pub fn to_pgn(mve: &ChessMove) -> String {
-    let mut move_str = format!("{}{}", mve.get_source(), mve.get_dest());
-
-    if let Some(piece) = &mve.get_promotion() {
-        let promo_str = match piece {
-            Piece::Knight => "n",
-            Piece::Bishop => "b",
-            Piece::Rook => "r",
-            Piece::Queen => "q",
-            _ => "",
-        };
-        move_str.push_str(promo_str);
-    }
-
-    move_str
-}
 
 fn generate_pgn(actions: Vec<&Action>) -> String {
     let mut pgn = String::new();
