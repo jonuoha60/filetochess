@@ -1,5 +1,5 @@
 use chess::{Action, ChessMove, Game, MoveGen};
-use std::collections::HashMap;
+use std::{collections::HashMap, time::Instant};
 use std::fs::File;
 use std::io::Write;
 use std::str::FromStr;
@@ -7,6 +7,7 @@ use std::str::FromStr;
 use crate::utils::{to_binary_string, to_pgn};
 
 pub fn decode(pgns: &Vec<String>, output_file_path: &str) {
+    let start_time = Instant::now();
     let mut collected_bits = String::new();
     let mut file_bits = Vec::new();
 
@@ -47,6 +48,11 @@ pub fn decode(pgns: &Vec<String>, output_file_path: &str) {
 
     let mut output_file = File::create(output_file_path).expect("Unable to create file");
     output_file.write_all(&file_bits).expect("Unable to write data to file");
+
+    println!(
+        "Decoded file in {:.3} seconds.",
+        start_time.elapsed().as_secs_f64()
+    );
 }
 
 fn parse_pgn(pgn: &str) -> Vec<Action> {

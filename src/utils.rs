@@ -4,6 +4,7 @@ pub fn to_binary_string(value: usize, length: usize) -> String {
     format!("{:0length$b}", value, length = length)
 }
 
+// This PGN parsing is really trash
 pub fn to_pgn(mve: &ChessMove) -> String {
     let mut move_str = format!("{}{}", mve.get_source(), mve.get_dest());
 
