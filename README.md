@@ -9,18 +9,16 @@ A LOT of this code is inspired/stolen from [WintrCat/chessencryption](https://gi
 ## Encoding file to a chess games
 
 ```bash
-filetochess -e image.jpg
+filetochess -e ./image.jpg ./output_games_folder
 ```
 
-This command will save the image.jpg in folder called `games`.
+This command will save the image.jpg in folder that you specified.
 
 ## Decoding file from a chess games
 
 ```bash
-filetochess -d output_file.jpg
+filetochess -d ./input_games_folder ./output_file.jpg
 ```
-
-You need to run this command in the same folder as the generated `games` folder is in.
 
 # Note!
 

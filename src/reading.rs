@@ -1,14 +1,15 @@
 use std::{
     fs::{self, File},
     io::{Read, Result, Write},
-    path::PathBuf,
+    path::{Path, PathBuf},
 };
 
-pub fn save_pgns(pgns: &[String], folder_path: &str) -> Result<()> {
+pub fn save_pgns(pgns: &[String], folder_path: &Path) -> Result<()> {
     fs::create_dir_all(folder_path)?;
 
     for (i, pgn) in pgns.iter().enumerate() {
-        let file_path = format!("{}/{}.txt", folder_path, i);
+        let file_path = folder_path.join(format!("{}.txt", i));
+
         let mut file = File::create(&file_path)?;
         file.write_all(pgn.as_bytes())?;
     }
@@ -18,7 +19,7 @@ pub fn save_pgns(pgns: &[String], folder_path: &str) -> Result<()> {
     Ok(())
 }
 
-pub fn read_pgns(folder_path: &str) -> Result<Vec<String>> {
+pub fn read_pgns(folder_path: &Path) -> Result<Vec<String>> {
     let mut entries: Vec<PathBuf> = fs::read_dir(folder_path)?
         .filter_map(|entry| entry.ok().map(|e| e.path()))
         .filter(|path| {
