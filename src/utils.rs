@@ -1,10 +1,10 @@
 use chess::{ChessMove, Piece};
 
 pub fn to_binary_string(value: usize, length: usize) -> String {
-    format!("{:0length$b}", value, length = length)
+    format("{:0length$b}", value, length = length)
 }
 
-// This PGN parsing is really trash
+// This PGN parsing isn't really good
 pub fn to_pgn(mve: &ChessMove) -> String {
     let mut move_str = format!("{}{}", mve.get_source(), mve.get_dest());
 
